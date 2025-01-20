@@ -34,7 +34,7 @@ func GetInstance() Logger {
 func log(level string, msg string) {
 	now := time.Now()
 	dateTime := fmt.Sprintf("%s.%03d", now.Format("2006-01-02 15:04:05"), now.Nanosecond()/1e6)
-	logMsg := fmt.Sprintf("%s\t[%s] %s\n", level, dateTime, msg)
+	logMsg := fmt.Sprintf("%s\t[%s]\t%s", level, dateTime, msg)
 	switch level {
 	case INFO:
 		fmt.Fprintln(os.Stdout, logMsg)
