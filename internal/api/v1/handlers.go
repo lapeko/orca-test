@@ -8,6 +8,8 @@ import (
 
 func attackHandler(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
+	defer func() { services.Stats.AddStats(time.Since(start).Nanoseconds()) }()
+
 	vmId := r.URL.Query().Get("vm_id")
 
 	if vmId == "" {
@@ -28,7 +30,6 @@ func attackHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	services.Stats.AddStats(time.Since(start).Nanoseconds())
 	sendSuccess(w, r, data)
 }
 
